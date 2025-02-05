@@ -2,9 +2,10 @@
 class Warrior < ApplicationRecord
   belongs_to :user
   belongs_to :academy
+  belongs_to :gender
   has_many :event_applications
   has_many :events, through: :event_applications
-  
+
 
   validates :first_name, :last_name, :date_of_birth, :weight, :belt_rank, presence: true
   validates :first_name, :last_name, length: { maximum: 50 }

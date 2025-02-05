@@ -24,15 +24,19 @@ Rails.application.routes.draw do
   resources :academies, only: [ :index, :new, :create, :show ]
   resource :warrior, except: [ :destroy ]
   resources :events do
-    resources :applications, only: [:new, :create], controller: 'event_applications'
+    resources :applications, only: [ :new, :create ], controller: "event_applications"
+    resources :divisions, only: [ :index ] do
+      collection do
+        post :generate
+      end
+    end
   end
 # config/routes.rb
-resources :event_applications, only: [:index, :show, :new, :create], 
-path: 'my-applications', 
-as: 'my_applications'
+resources :event_applications, only: [ :index, :show, :new, :create ],
+path: "my-applications",
+as: "my_applications"
 
 namespace :admin do
-  resources :event_applications, only: [:index, :update]
+  resources :event_applications, only: [ :index, :update ]
 end
-
 end

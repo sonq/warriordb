@@ -1,0 +1,47 @@
+
+<div class="px-4 sm:px-6 lg:px-8">
+  <div class="sm:flex sm:items-center">
+    <div class="sm:flex-auto">
+      <h1 class="text-xl font-semibold text-gray-900">Kategoriler</h1>
+    </div>
+    <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+      <%= button_to "Kategorileri Oluştur", 
+          generate_event_divisions_path(@event), 
+          method: :post,
+          class: "inline-flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700" %>
+    </div>
+  </div>
+
+  <div class="mt-8">
+    <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+      <table class="min-w-full divide-y divide-gray-300">
+        <thead class="bg-gray-50">
+          <tr>
+            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Kategori</th>
+            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Cinsiyet</th>
+            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Stil</th>
+            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Kuşak</th>
+            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Kilo</th>
+            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Durum</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200 bg-white">
+          <% @divisions.each do |division| %>
+            <tr>
+              <td class="px-3 py-4 text-sm text-gray-500"><%= division.name %></td>
+              <td class="px-3 py-4 text-sm text-gray-500"><%= division.gender.name %></td>
+              <td class="px-3 py-4 text-sm text-gray-500"><%= division.category.upcase %></td>
+              <td class="px-3 py-4 text-sm text-gray-500"><%= division.belt_rank %></td>
+              <td class="px-3 py-4 text-sm text-gray-500">
+                <%= "#{division.min_weight} - #{division.max_weight} kg" %>
+              </td>
+              <td class="px-3 py-4 text-sm text-gray-500">
+                <%= division.division_status.name %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

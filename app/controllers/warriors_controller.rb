@@ -46,8 +46,8 @@ class WarriorsController < ApplicationController
     params.require(:warrior).permit(
       :first_name, :last_name, :date_of_birth,
       :weight, :belt_rank, :academy_id,
-      :experience_years, :phone,
-      :gi_practitioner, :nogi_practitioner
+      :experience_years, :phone, :gender_id,
+      :gi_practitioner, :nogi_practitioner, :mma
     )
   end
 end

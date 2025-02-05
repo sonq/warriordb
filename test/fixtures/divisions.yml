@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  event: one
+  name: MyString
+  gender: one
+  belt_rank: MyString
+  min_weight: 9.99
+  max_weight: 9.99
+  min_age: 1
+  max_age: 1
+  category: MyString
+  division_status: one
+
+two:
+  event: two
+  name: MyString
+  gender: two
+  belt_rank: MyString
+  min_weight: 9.99
+  max_weight: 9.99
+  min_age: 1
+  max_age: 1
+  category: MyString
+  division_status: two

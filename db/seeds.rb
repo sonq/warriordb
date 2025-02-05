@@ -10,7 +10,7 @@
 
 
 # db/seeds.rb
-event_statuses = ['Taslak', 'Yayında', 'Devam Ediyor', 'Tamamlandı', 'İptal Edildi']
+event_statuses = [ 'Taslak', 'Yayında', 'Devam Ediyor', 'Tamamlandı', 'İptal Edildi' ]
 
 event_statuses.each do |status|
   EventStatus.find_or_create_by!(name: status)
@@ -21,6 +21,19 @@ beklemede = EventApplicationStatus.find_or_create_by!(name: 'Onay Bekliyor') do 
   status.is_default = true
 end
 
-['Onaylandı', 'Reddedildi'].each do |name|
+[ 'Onaylandı', 'Reddedildi' ].each do |name|
   EventApplicationStatus.find_or_create_by!(name: name)
+end
+
+# db/seeds.rb
+[ 'Bay', 'Bayan' ].each do |name|
+  Gender.find_or_create_by!(name: name)
+end
+
+
+# db/seeds.rb
+division_statuses = [ 'Taslak', 'Aktif', 'Tamamlandı' ]
+
+division_statuses.each do |status|
+  DivisionStatus.find_or_create_by!(name: status)
 end

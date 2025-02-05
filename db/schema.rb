@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_05_103227) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_05_130432) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -21,6 +21,31 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_05_103227) do
     t.string "email", limit: 100
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "division_statuses", force: :cascade do |t|
+    t.string "name", limit: 50, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_division_statuses_on_name", unique: true
+  end
+
+  create_table "divisions", force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.string "name", limit: 100, null: false
+    t.bigint "gender_id", null: false
+    t.string "belt_rank", limit: 20, null: false
+    t.decimal "min_weight", precision: 5, scale: 2
+    t.decimal "max_weight", precision: 5, scale: 2
+    t.integer "min_age"
+    t.integer "max_age"
+    t.string "category", limit: 20, null: false
+    t.bigint "division_status_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["division_status_id"], name: "index_divisions_on_division_status_id"
+    t.index ["event_id"], name: "index_divisions_on_event_id"
+    t.index ["gender_id"], name: "index_divisions_on_gender_id"
   end
 
   create_table "event_application_statuses", force: :cascade do |t|
@@ -69,6 +94,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_05_103227) do
     t.index ["event_status_id"], name: "index_events_on_event_status_id"
   end
 
+  create_table "genders", force: :cascade do |t|
+    t.string "name", limit: 20, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_genders_on_name", unique: true
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", limit: 100
     t.string "password_digest", limit: 255
@@ -94,14 +126,20 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_05_103227) do
     t.bigint "academy_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "gender_id", null: false
     t.index ["academy_id"], name: "index_warriors_on_academy_id"
+    t.index ["gender_id"], name: "index_warriors_on_gender_id"
     t.index ["user_id"], name: "index_warriors_on_user_id"
   end
 
+  add_foreign_key "divisions", "division_statuses"
+  add_foreign_key "divisions", "events"
+  add_foreign_key "divisions", "genders"
   add_foreign_key "event_applications", "event_application_statuses"
   add_foreign_key "event_applications", "events"
   add_foreign_key "event_applications", "warriors"
   add_foreign_key "events", "event_statuses"
   add_foreign_key "warriors", "academies"
+  add_foreign_key "warriors", "genders"
   add_foreign_key "warriors", "users"
 end

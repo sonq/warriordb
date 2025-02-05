@@ -49,11 +49,11 @@
                        #{current_page?(academies_path) ? 'border-b-2 border-blue-500' : ''}" %>
 
             <% if current_user.warrior.present? %>
-              <%= link_to "Sporcu Profilim", warrior_path, 
+              <%= link_to "Warrior Profilim", warrior_path, 
                   class: "text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium
                          #{current_page?(warrior_path) ? 'border-b-2 border-blue-500' : ''}" %>
             <% else %>
-              <%= link_to "Sporcu Profili Oluştur", new_warrior_path, 
+              <%= link_to "Warrior Profili Oluştur", new_warrior_path, 
                   class: "text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium" %>
             <% end %>
 
