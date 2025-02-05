@@ -1,0 +1,36 @@
+<%# app/views/academies/index.html.erb %>
+<div class="bg-white shadow rounded-lg">
+  <div class="px-4 py-5 sm:px-6 flex justify-between items-center">
+    <h3 class="text-xl font-semibold leading-6 text-gray-900">Akademiler</h3>
+    <%= link_to "Yeni Akademi Ekle", new_academy_path, 
+        class: "rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500" %>
+  </div>
+  
+  <div class="border-t border-gray-200">
+    <ul role="list" class="divide-y divide-gray-200">
+      <% @academies.each do |academy| %>
+        <li class="px-4 py-5 sm:px-6 hover:bg-gray-50">
+          <%= link_to academy_path(academy) do %>
+            <div class="flex justify-between">
+              <div>
+                <h4 class="text-lg font-medium text-gray-900"><%= academy.name %></h4>
+                <% if academy.email.present? %>
+                  <p class="mt-1 text-sm text-gray-500"><%= academy.email %></p>
+                <% end %>
+                <% if academy.phone.present? %>
+                  <p class="mt-1 text-sm text-gray-500"><%= academy.phone %></p>
+                <% end %>
+              </div>
+              <div class="text-sm text-gray-500">
+                <%= pluralize(academy.warriors.count, 'sporcu') %>
+              </div>
+            </div>
+            <% if academy.address.present? %>
+              <p class="mt-2 text-sm text-gray-500"><%= academy.address %></p>
+            <% end %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

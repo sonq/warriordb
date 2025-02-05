@@ -1,0 +1,10 @@
+<%# app/views/home/index.html.erb %>
+<div class="mx-auto md:w-2/3 w-full">
+  <h1 class="font-bold text-4xl">WarriorDB</h1>
+  
+  <% if current_user %>
+    <p>Hoşgeldin, <%= current_user.first_name %>!</p>
+  <% else %>
+    <p>Devam etmek için <%= link_to "Kayıt ol.", sign_up_path, class: "text-blue-600" %> </p>
+  <% end %>
+</div>

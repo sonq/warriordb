@@ -1,0 +1,44 @@
+<%# app/views/academies/show.html.erb %>
+<div class="bg-white shadow rounded-lg">
+  <div class="px-4 py-5 sm:px-6">
+    <h3 class="text-xl font-semibold leading-6 text-gray-900"><%= @academy.name %></h3>
+    <div class="mt-2 text-sm text-gray-500">
+      <% if @academy.email.present? %>
+        <p><%= @academy.email %></p>
+      <% end %>
+      <% if @academy.phone.present? %>
+        <p><%= @academy.phone %></p>
+      <% end %>
+      <% if @academy.address.present? %>
+        <p class="mt-1"><%= @academy.address %></p>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="border-t border-gray-200">
+    <div class="px-4 py-5 sm:px-6">
+      <h4 class="text-lg font-medium text-gray-900">Sporcular</h4>
+      <div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <% @warriors.each do |warrior| %>
+          <div class="relative rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-gray-900">
+                <%= warrior.full_name %>
+              </p>
+              <p class="text-sm text-gray-500">
+                <%= warrior.belt_rank %> Kuşak
+                <% if warrior.gi_practitioner && warrior.nogi_practitioner %>
+                  (Gi + No-Gi)
+                <% elsif warrior.gi_practitioner %>
+                  (Gi)
+                <% else %>
+                  (No-Gi)
+                <% end %>
+              </p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

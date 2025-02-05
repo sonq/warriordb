@@ -1,0 +1,74 @@
+<%# app/views/events/_form.html.erb %>
+<%= form_with(model: event, class: "space-y-6") do |form| %>
+  <% if event.errors.any? %>
+    <div class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg">
+      <ul class="list-disc list-inside">
+        <% event.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="md:col-span-2">
+      <%= form.label :name, "Etkinlik Adı", class: "block text-sm font-medium text-gray-700" %>
+      <%= form.text_field :name, class: "mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" %>
+    </div>
+
+    <div>
+      <%= form.label :date, "Etkinlik Tarihi", class: "block text-sm font-medium text-gray-700" %>
+      <%= form.date_field :date, class: "mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" %>
+    </div>
+
+    <div>
+      <%= form.label :registration_deadline, "Son Kayıt Tarihi", class: "block text-sm font-medium text-gray-700" %>
+      <%= form.date_field :registration_deadline, class: "mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" %>
+    </div>
+
+    <div>
+      <%= form.label :location, "Konum", class: "block text-sm font-medium text-gray-700" %>
+      <%= form.text_field :location, class: "mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" %>
+    </div>
+
+    <div>
+      <%= form.label :event_status_id, "Durum", class: "block text-sm font-medium text-gray-700" %>
+      <%= form.collection_select :event_status_id, 
+          EventStatus.order(:name), :id, :name,
+          { prompt: "Durum Seçin" }, 
+          class: "mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" %>
+    </div>
+
+    <div class="md:col-span-2">
+      <%= form.label :description, "Açıklama", class: "block text-sm font-medium text-gray-700" %>
+      <%= form.text_area :description, rows: 4, class: "mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" %>
+    </div>
+
+    <div class="md:col-span-2">
+      <fieldset>
+        <legend class="text-sm font-medium text-gray-700">Kategoriler</legend>
+        <div class="mt-4 space-y-4">
+          <div class="flex items-center">
+            <%= form.check_box :gi, class: "h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" %>
+            <%= form.label :gi, "Gi", class: "ml-2 block text-sm text-gray-900" %>
+          </div>
+
+          <div class="flex items-center">
+            <%= form.check_box :nogi, class: "h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" %>
+            <%= form.label :nogi, "No-Gi", class: "ml-2 block text-sm text-gray-900" %>
+          </div>
+
+          <div class="flex items-center">
+            <%= form.check_box :mma, class: "h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" %>
+            <%= form.label :mma, "MMA", class: "ml-2 block text-sm text-gray-900" %>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+
+  <div class="flex justify-end gap-x-3">
+    <%= link_to "İptal", events_path, class: "rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" %>
+    <%= form.submit event.new_record? ? "Oluştur" : "Güncelle", class: "rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600" %>
+  </div>
+<% end %>

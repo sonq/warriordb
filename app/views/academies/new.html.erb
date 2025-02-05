@@ -1,0 +1,41 @@
+<%# app/views/academies/new.html.erb %>
+<div class="bg-white shadow rounded-lg p-6">
+  <h2 class="text-xl font-semibold mb-6">Yeni Akademi</h2>
+
+  <%= form_with(model: @academy, class: "space-y-6") do |form| %>
+    <% if @academy.errors.any? %>
+      <div class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg">
+        <ul>
+          <% @academy.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div>
+      <%= form.label :name, "Akademi Adı", class: "block text-sm font-medium text-gray-700" %>
+      <%= form.text_field :name, class: "mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" %>
+    </div>
+
+    <div>
+      <%= form.label :email, "E-posta", class: "block text-sm font-medium text-gray-700" %>
+      <%= form.email_field :email, class: "mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" %>
+    </div>
+
+    <div>
+      <%= form.label :phone, "Telefon", class: "block text-sm font-medium text-gray-700" %>
+      <%= form.telephone_field :phone, class: "mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" %>
+    </div>
+
+    <div>
+      <%= form.label :address, "Adres", class: "block text-sm font-medium text-gray-700" %>
+      <%= form.text_area :address, rows: 3, class: "mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" %>
+    </div>
+
+    <div class="flex justify-end space-x-4">
+      <%= link_to "İptal", academies_path, class: "px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+      <%= form.submit "Oluştur", class: "px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+    </div>
+  <% end %>
+</div>

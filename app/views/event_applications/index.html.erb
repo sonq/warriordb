@@ -1,0 +1,60 @@
+<%# app/views/event_applications/index.html.erb %>
+<div class="space-y-8">
+  <div class="sm:flex sm:items-center sm:justify-between">
+    <h1 class="text-2xl font-bold text-gray-900">Başvurularım</h1>
+    
+    <%= link_to new_my_application_path,
+        class: "inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600" do %>
+      Yeni Başvuru
+    <% end %>
+  </div>
+
+  <div class="bg-white shadow overflow-hidden sm:rounded-md">
+    <% if @applications.any? %>
+      <ul role="list" class="divide-y divide-gray-200">
+        <% @applications.each do |application| %>
+          <%= link_to my_application_path(application), class: "block hover:bg-gray-50" do %>
+            <div class="px-4 py-4 sm:px-6">
+              <div class="flex items-center justify-between">
+                <div class="flex-1 min-w-0">
+                  <p class="text-sm font-medium text-blue-600 truncate">
+                    <%= application.event.name %>
+                  </p>
+                  <p class="mt-1 text-sm text-gray-500">
+                    <%= l application.event.date, format: :long %>
+                  </p>
+                </div>
+                <%# app/views/event_applications/index.html.erb %>
+                <!-- Change this part -->
+                <div class="ml-4 flex-shrink-0">
+                    <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium <%= application_status_class(application.event_application_status.name) %>">
+                        <%= application.event_application_status.name %>
+                    </span>
+                </div>
+              </div>
+              
+              <div class="mt-2 flex">
+                <div class="flex gap-2">
+                  <% if application.gi %>
+                    <span class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">Gi</span>
+                  <% end %>
+                  <% if application.nogi %>
+                    <span class="inline-flex items-center rounded-md bg-purple-50 px-2 py-1 text-xs font-medium text-purple-700 ring-1 ring-inset ring-purple-700/10">No-Gi</span>
+                  <% end %>
+                  <% if application.mma %>
+                    <span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-700/10">MMA</span>
+                  <% end %>
+                </div>
+                <span class="ml-4 text-sm text-gray-500"><%= application.weight %> kg</span>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </ul>
+    <% else %>
+      <div class="text-center py-12">
+        <p class="text-sm text-gray-500">Henüz başvurunuz bulunmuyor.</p>
+      </div>
+    <% end %>
+  </div>
+</div>

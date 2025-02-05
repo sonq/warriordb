@@ -1,0 +1,73 @@
+<%# app/views/events/show.html.erb %>
+<div class="bg-white shadow sm:rounded-lg">
+  <div class="px-4 py-5 sm:p-6">
+    <div class="sm:flex sm:items-center sm:justify-between">
+      <div>
+        <h1 class="text-2xl font-bold text-gray-900"><%= @event.name %></h1>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500">
+          <%= @event.location %>
+        </p>
+      </div>
+      <div class="mt-4 sm:mt-0">
+        <span class="inline-flex items-center rounded-md bg-<%= event_status_color(@event.event_status.name) %>-50 px-2 py-1 text-sm font-medium text-<%= event_status_color(@event.event_status.name) %>-700 ring-1 ring-inset ring-<%= event_status_color(@event.event_status.name) %>-600/20">
+          <%= @event.event_status.name %>
+        </span>
+      </div>
+    </div>
+
+    <div class="mt-6 border-t border-gray-100">
+      <dl class="divide-y divide-gray-100">
+        <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
+          <dt class="text-sm font-medium text-gray-500">Etkinlik Tarihi</dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+            <%= l @event.date, format: :long %>
+          </dd>
+        </div>
+
+        <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
+          <dt class="text-sm font-medium text-gray-500">Son Kayıt Tarihi</dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+            <%= l @event.registration_deadline, format: :long %>
+          </dd>
+        </div>
+
+        <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
+          <dt class="text-sm font-medium text-gray-500">Kategoriler</dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+            <div class="flex gap-2">
+              <% if @event.gi %>
+                <span class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">Gi</span>
+              <% end %>
+              <% if @event.nogi %>
+                <span class="inline-flex items-center rounded-md bg-purple-50 px-2 py-1 text-xs font-medium text-purple-700 ring-1 ring-inset ring-purple-700/10">No-Gi</span>
+              <% end %>
+              <% if @event.mma %>
+                <span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-700/10">MMA</span>
+              <% end %>
+            </div>
+          </dd>
+        </div>
+
+        <% if @event.description.present? %>
+          <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
+            <dt class="text-sm font-medium text-gray-500">Açıklama</dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+              <%= simple_format @event.description, class: "whitespace-pre-wrap" %>
+            </dd>
+          </div>
+        <% end %>
+      </dl>
+    </div>
+
+    <% if current_user&.admin? %>
+      <div class="mt-6 flex justify-end gap-x-3">
+        <%= link_to "Düzenle", edit_event_path(@event), 
+            class: "rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" %>
+        <%= button_to "Sil", event_path(@event), 
+            method: :delete,
+            class: "rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600",
+            data: { confirm: "Bu etkinliği silmek istediğinizden emin misiniz?" } %>
+      </div>
+    <% end %>
+  </div>
+</div>

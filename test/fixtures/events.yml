@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  date: 2025-02-05
+  location: MyString
+  registration_deadline: 2025-02-05
+  description: MyText
+  gi: false
+  nogi: false
+  mma: false
+  event_status: one
+
+two:
+  name: MyString
+  date: 2025-02-05
+  location: MyString
+  registration_deadline: 2025-02-05
+  description: MyText
+  gi: false
+  nogi: false
+  mma: false
+  event_status: two

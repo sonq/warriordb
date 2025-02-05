@@ -1,0 +1,73 @@
+<%# app/views/warriors/show.html.erb %>
+
+<div class="bg-white shadow sm:rounded-lg max-w-3xl mx-auto">
+  <div class="px-4 py-5 sm:px-6 flex justify-between items-center border-b border-gray-200">
+    <div>
+      <h3 class="text-2xl font-bold leading-6 text-gray-900">Sporcu Profili</h3>
+      <p class="mt-2 text-sm text-gray-600">
+        <%= @warrior.academy.name %>
+      </p>
+    </div>
+    <%= link_to "Düzenle", edit_warrior_path, 
+        class: "inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600" %>
+  </div>
+
+  <div class="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
+    <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2">
+      <div>
+        <h4 class="text-sm font-medium leading-6 text-gray-900">Ad Soyad</h4>
+        <p class="mt-1 text-sm text-gray-500"><%= @warrior.full_name %></p>
+      </div>
+
+      <div>
+        <h4 class="text-sm font-medium leading-6 text-gray-900">Telefon</h4>
+        <p class="mt-1 text-sm text-gray-500"><%= @warrior.phone %></p>
+      </div>
+
+      <div>
+        <h4 class="text-sm font-medium leading-6 text-gray-900">Doğum Tarihi</h4>
+        <p class="mt-1 text-sm text-gray-500">
+          <%= @warrior.date_of_birth.strftime("%d/%m/%Y") %>
+          <span class="ml-2 inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
+            <%= @warrior.age %> yaş
+          </span>
+        </p>
+      </div>
+
+      <div>
+        <h4 class="text-sm font-medium leading-6 text-gray-900">Kilo</h4>
+        <p class="mt-1 text-sm text-gray-500"><%= @warrior.weight %> kg</p>
+      </div>
+
+      <div>
+        <h4 class="text-sm font-medium leading-6 text-gray-900">Kuşak</h4>
+        <p class="mt-1">
+          <span class="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20">
+            <%= @warrior.belt_rank %>
+          </span>
+        </p>
+      </div>
+
+      <div>
+        <h4 class="text-sm font-medium leading-6 text-gray-900">Tecrübe</h4>
+        <p class="mt-1 text-sm text-gray-500"><%= @warrior.experience_years %> yıl</p>
+      </div>
+
+      <div class="sm:col-span-2">
+        <h4 class="text-sm font-medium leading-6 text-gray-900">Kategoriler</h4>
+        <div class="mt-2 flex gap-2">
+          <% if @warrior.gi_practitioner %>
+            <span class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">
+              Gi
+            </span>
+          <% end %>
+          <% if @warrior.nogi_practitioner %>
+            <span class="inline-flex items-center rounded-md bg-purple-50 px-2 py-1 text-xs font-medium text-purple-700 ring-1 ring-inset ring-purple-700/10">
+              No-Gi
+            </span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

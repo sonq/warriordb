@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  event: one
+  warrior: one
+  status: MyString
+  gi: false
+  nogi: false
+  mma: false
+  weight: 9.99
+  notes: MyText
+
+two:
+  event: two
+  warrior: two
+  status: MyString
+  gi: false
+  nogi: false
+  mma: false
+  weight: 9.99
+  notes: MyText

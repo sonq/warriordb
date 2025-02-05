@@ -1,0 +1,67 @@
+<%# app/views/event_applications/show.html.erb %>
+<div class="bg-white shadow overflow-hidden sm:rounded-lg">
+  <div class="px-4 py-5 sm:px-6">
+    <div class="flex justify-between items-start">
+      <div>
+        <h3 class="text-xl font-semibold leading-6 text-gray-900">
+          Başvuru Detayları
+        </h3>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500">
+          <%= @application.event.name %>
+        </p>
+      </div>
+     <%# app/views/event_applications/show.html.erb %>
+        <!-- Change this part -->
+        <span class="inline-flex items-center rounded-md px-2 py-1 text-sm font-medium <%= application_status_class(@application.event_application_status.name) %>">
+        <%= @application.event_application_status.name %>
+        </span>
+    </div>
+  </div>
+  
+  <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
+    <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500">Etkinlik Tarihi</dt>
+        <dd class="mt-1 text-sm text-gray-900">
+          <%= l @application.event.date, format: :long %>
+        </dd>
+      </div>
+
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500">Başvuru Tarihi</dt>
+        <dd class="mt-1 text-sm text-gray-900">
+          <%= l @application.created_at.to_date, format: :long %>
+        </dd>
+      </div>
+
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500">Kilo</dt>
+        <dd class="mt-1 text-sm text-gray-900"><%= @application.weight %> kg</dd>
+      </div>
+
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500">Kategoriler</dt>
+        <dd class="mt-1 flex gap-2">
+          <% if @application.gi %>
+            <span class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">Gi</span>
+          <% end %>
+          <% if @application.nogi %>
+            <span class="inline-flex items-center rounded-md bg-purple-50 px-2 py-1 text-xs font-medium text-purple-700 ring-1 ring-inset ring-purple-700/10">No-Gi</span>
+          <% end %>
+          <% if @application.mma %>
+            <span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-700/10">MMA</span>
+          <% end %>
+        </dd>
+      </div>
+
+      <% if @application.notes.present? %>
+        <div class="sm:col-span-2">
+          <dt class="text-sm font-medium text-gray-500">Notlar</dt>
+          <dd class="mt-1 text-sm text-gray-900">
+            <%= simple_format @application.notes %>
+          </dd>
+        </div>
+      <% end %>
+    </dl>
+  </div>
+</div>
